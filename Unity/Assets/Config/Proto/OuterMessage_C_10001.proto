@@ -263,3 +263,115 @@ message G2C_Benchmark // IResponse
 	int32 Error = 91;
 	string Message = 92;
 }
+
+//ResponseType A2C_NewAccount
+message C2A_NewAccount //IRequest
+{
+	int32 RpcId = 90;
+	string EMailAddress = 1;
+    string Password = 2;
+    string RealName = 3;
+    int64 BirthDate = 4;
+    string Question = 5;
+    string Answer = 6;
+}
+
+message A2C_NewAccount //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+}
+
+//ResponseType A2C_ChangePassword
+message C2A_ChangePassword //IRequest
+{
+	int32 RpcId = 90;
+	string EMailAddress = 1;
+    string Password = 2;
+	string NewPassword = 3;
+}
+
+message A2C_ChangePassword //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	int64 Duration = 3;
+}
+
+//ResponseType A2C_LoginAccount
+message C2A_LoginAccount //IRequest
+{
+	int32 RpcId = 90;
+	string EMailAddress = 1;
+    string Password = 2;
+}
+
+message A2C_LoginAccount //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	string Token = 1;
+	int64 AccountId  = 2;
+	int64 Duration = 3; 
+}
+
+message A2C_Disconnect //IMessage
+{
+	int32 Error = 1;
+}
+
+message ServerInfoProto
+{
+	int32 Id = 1;
+	int32 Status = 2;
+	string ServerName = 3;
+}
+
+//ResponseType A2C_GetServerInfos
+message C2A_GetServerInfos //IRequest
+{
+	int32 RpcId = 90;
+	string Token = 1;
+	int64 AccountId = 2;
+}
+
+message A2C_GetServerInfos //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	repeated ServerInfoProto ServerInfosList = 1;
+}
+
+message RoleInfoProto
+{
+	int64 Id = 1;
+	string Name  = 2;
+	int32 State = 3;
+	int64 AccountId = 4;
+	int64 LastLoginTime = 5;
+	int64 CreateTime = 6;
+	int32 ServerId = 7;
+
+}
+
+//ResponseType A2C_CreateRole
+message C2A_CreateRole //IRequest
+{
+	int32 RpcId = 90;
+	string Token = 1;
+	int64 AccountId = 2;
+	string Name = 3;
+	int32 ServerId = 4;
+}
+
+message A2C_CreateRole //IResponse
+{
+	int32 RpcId = 90;
+	int32 Error = 91;
+	string Message = 92;
+	RoleInfoProto RoleInfo = 1;
+}

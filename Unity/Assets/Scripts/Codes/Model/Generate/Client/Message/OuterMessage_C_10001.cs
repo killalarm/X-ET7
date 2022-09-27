@@ -542,6 +542,251 @@ namespace ET
 
 	}
 
+	[ResponseType(nameof(A2C_NewAccount))]
+	[Message(OuterMessage.C2A_NewAccount)]
+	[ProtoContract]
+	public partial class C2A_NewAccount: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string EMailAddress { get; set; }
+
+		[ProtoMember(2)]
+		public string Password { get; set; }
+
+		[ProtoMember(3)]
+		public string RealName { get; set; }
+
+		[ProtoMember(4)]
+		public long BirthDate { get; set; }
+
+		[ProtoMember(5)]
+		public string Question { get; set; }
+
+		[ProtoMember(6)]
+		public string Answer { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_NewAccount)]
+	[ProtoContract]
+	public partial class A2C_NewAccount: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+	}
+
+	[ResponseType(nameof(A2C_ChangePassword))]
+	[Message(OuterMessage.C2A_ChangePassword)]
+	[ProtoContract]
+	public partial class C2A_ChangePassword: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string EMailAddress { get; set; }
+
+		[ProtoMember(2)]
+		public string Password { get; set; }
+
+		[ProtoMember(3)]
+		public string NewPassword { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_ChangePassword)]
+	[ProtoContract]
+	public partial class A2C_ChangePassword: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(3)]
+		public long Duration { get; set; }
+
+	}
+
+	[ResponseType(nameof(A2C_LoginAccount))]
+	[Message(OuterMessage.C2A_LoginAccount)]
+	[ProtoContract]
+	public partial class C2A_LoginAccount: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string EMailAddress { get; set; }
+
+		[ProtoMember(2)]
+		public string Password { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_LoginAccount)]
+	[ProtoContract]
+	public partial class A2C_LoginAccount: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public string Token { get; set; }
+
+		[ProtoMember(2)]
+		public long AccountId { get; set; }
+
+		[ProtoMember(3)]
+		public long Duration { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_Disconnect)]
+	[ProtoContract]
+	public partial class A2C_Disconnect: Object, IMessage
+	{
+		[ProtoMember(1)]
+		public int Error { get; set; }
+
+	}
+
+	[Message(OuterMessage.ServerInfoProto)]
+	[ProtoContract]
+	public partial class ServerInfoProto: Object
+	{
+		[ProtoMember(1)]
+		public int Id { get; set; }
+
+		[ProtoMember(2)]
+		public int Status { get; set; }
+
+		[ProtoMember(3)]
+		public string ServerName { get; set; }
+
+	}
+
+	[ResponseType(nameof(A2C_GetServerInfos))]
+	[Message(OuterMessage.C2A_GetServerInfos)]
+	[ProtoContract]
+	public partial class C2A_GetServerInfos: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string Token { get; set; }
+
+		[ProtoMember(2)]
+		public long AccountId { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_GetServerInfos)]
+	[ProtoContract]
+	public partial class A2C_GetServerInfos: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public List<ServerInfoProto> ServerInfosList = new List<ServerInfoProto>();
+
+	}
+
+	[Message(OuterMessage.RoleInfoProto)]
+	[ProtoContract]
+	public partial class RoleInfoProto: Object
+	{
+		[ProtoMember(1)]
+		public long Id { get; set; }
+
+		[ProtoMember(2)]
+		public string Name { get; set; }
+
+		[ProtoMember(3)]
+		public int State { get; set; }
+
+		[ProtoMember(4)]
+		public long AccountId { get; set; }
+
+		[ProtoMember(5)]
+		public long LastLoginTime { get; set; }
+
+		[ProtoMember(6)]
+		public long CreateTime { get; set; }
+
+		[ProtoMember(7)]
+		public int ServerId { get; set; }
+
+	}
+
+	[ResponseType(nameof(A2C_CreateRole))]
+	[Message(OuterMessage.C2A_CreateRole)]
+	[ProtoContract]
+	public partial class C2A_CreateRole: Object, IRequest
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(1)]
+		public string Token { get; set; }
+
+		[ProtoMember(2)]
+		public long AccountId { get; set; }
+
+		[ProtoMember(3)]
+		public string Name { get; set; }
+
+		[ProtoMember(4)]
+		public int ServerId { get; set; }
+
+	}
+
+	[Message(OuterMessage.A2C_CreateRole)]
+	[ProtoContract]
+	public partial class A2C_CreateRole: Object, IResponse
+	{
+		[ProtoMember(90)]
+		public int RpcId { get; set; }
+
+		[ProtoMember(91)]
+		public int Error { get; set; }
+
+		[ProtoMember(92)]
+		public string Message { get; set; }
+
+		[ProtoMember(1)]
+		public RoleInfoProto RoleInfo { get; set; }
+
+	}
+
 	public static class OuterMessage
 	{
 		 public const ushort HttpGetRouterResponse = 10002;
@@ -578,5 +823,18 @@ namespace ET
 		 public const ushort M2C_TransferMap = 10033;
 		 public const ushort C2G_Benchmark = 10034;
 		 public const ushort G2C_Benchmark = 10035;
+		 public const ushort C2A_NewAccount = 10036;
+		 public const ushort A2C_NewAccount = 10037;
+		 public const ushort C2A_ChangePassword = 10038;
+		 public const ushort A2C_ChangePassword = 10039;
+		 public const ushort C2A_LoginAccount = 10040;
+		 public const ushort A2C_LoginAccount = 10041;
+		 public const ushort A2C_Disconnect = 10042;
+		 public const ushort ServerInfoProto = 10043;
+		 public const ushort C2A_GetServerInfos = 10044;
+		 public const ushort A2C_GetServerInfos = 10045;
+		 public const ushort RoleInfoProto = 10046;
+		 public const ushort C2A_CreateRole = 10047;
+		 public const ushort A2C_CreateRole = 10048;
 	}
 }
